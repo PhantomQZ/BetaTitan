@@ -1,7 +1,21 @@
+<?php include("conn.php"); ?>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
 <TITLE>Group Register</TITLE>
+<script type="text/javascript">
+	function chkfrm()
+	{
+		if (document.getElementbyID("com").value == "Yes")
+		{
+			document.getElementById("hidContent").style.visibility = "visible";
+		}
+		else
+		{
+			document.getElementById("hidContent").style.visibility = "hidden";
+		}
+	}
+</script>
 </HEAD>
 <style>
 #header{
@@ -122,13 +136,18 @@ It is recommended that you appoint another leader once you group is authorized s
 	</select>
 <br><br>
 <b>Company*</b>
-<br><select name="CompanyAva">
-	<option value"Yes">Yes
+<br><select id="com" onchange="chkfrm()" name="CompanyAva">
 	<option value="No">No
+	<option value"Yes">Yes
 	</select>
+<div id="hidContent" style="visibility:hidden">
 <br>Company Address<br><textarea name="GCAddress" cols="60" rows="3" maxlength="100"></textarea>
+<br>State<br><input type="text" name="Com_state" size="20">
+<br>Postcode<br><input type="text" name="Com_postcode" size="20">
+<br>Country<br><input type="text" name="Com_country" size="20"><br>
 <br><input type="text" name="CPhone" size="20">(phone)
 	<input type="text" name="CFax" size="20"> (fax)
+</div>
 <br><br>
 <b>Group Email</b>
 <br><input type="text" name="GEmail" size="50">
