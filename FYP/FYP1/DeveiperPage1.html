@@ -1,0 +1,263 @@
+<!doctype html>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+				//  Check Radio-box
+				$(".rating input:radio").attr("checked", false);
+				$('.rating input').click(function () {
+				$(".rating span").removeClass('checked');
+				$(this).parent().addClass('checked');
+				});
+
+				$('input:radio').change(
+				function(){
+				var userRating = this.value;
+				alert(userRating);
+				}); 
+				});
+</script>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="DP.css" rel="stylesheet" type="text/css"><ul></ul>
+<title>Group 1</title>
+	<style>
+		#header{
+	background: #191919 url(/borderless/images/default/bg_header.png) repeat-x center top;
+	height: 140px;
+	margin-top: -17px;
+	margin-left:-8px;
+	width:1368px;
+}
+		#header a.logo{no-repeat 5px top;
+	display: block;
+	float: left;
+	height: 137px;
+	width: 80px
+}
+		#header h1{display:none}
+		#menu{
+	float: left;
+	list-style: none;
+	margin-top: 48px;
+	margin-right: 0;
+	margin-left: 358px;
+	margin-bottom: 0;
+	margin-left: 317px
+}
+		#menu li{display:block;float:left;height:60px}
+		#menu li a{display:block;color:#7BD2DC;float:left;font-size:19px;font-weight:bold;height:60px;line-height:60px;padding:0 8px;text-align:center;text-decoration:none}
+		#menu:hover li.on a:hover,
+		#menu li a:hover,
+		#menu li.on a{background:url(/borderless/images/default/bg_header_menu.png) no-repeat center bottom;_background:none;color:#00FFF3}
+		#menu li.platforms a:hover{background:none}
+		#menu:hover li.on a{background:none}
+		#menu li a.menutooltip{background:#080808;color:#fff;line-height:1;padding:6px;text-indent:0;width:auto;z-index:2}
+		#login{float:right;padding-right:10px;text-align:right;width:370px;color:#FFFFFF}
+		#login a{color:#FFFFFF;text-decoration:none}
+#body{
+	display: block;
+}
+body{	background-image:url(background.jpg);}
+#About{
+	text-align: center;
+	background-image:url(background03.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+}
+#About a{color:green;
+text-decoration:none;}
+#About a:visited{color:white;}
+#About a:hover{font-size:18px;color:red;}
+#Point1{
+	width: 500px;
+	float: left;
+	background-image: url(asd.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+}
+#Point2{
+	width: 500px;
+	float: right;
+	background-image: url(asd.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+#Point3{
+	width: 500px;
+	float: left;
+	background-image: url(asd.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+	padding-top: 15px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	padding-right: 15px;
+}
+#Headerp{
+	background-color: rgba(55,55,55,1.06);
+	margin-top: -20px;
+}
+#ContectLock{
+	height: 491px;
+	width: 1000px;
+	margin-left: 147px;
+	background-image: url(background02.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+}
+
+    </style>
+</head>
+
+<body>
+<div id="body">
+		<div id="header">
+			<div class="container">
+			<h1>Titan Games</h1>
+			<a href="#" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
+			<ul id="menu">
+			<li><a href="#">Games</a></li>
+			<li><a href="#">Community</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Support</a></li>
+            <li><a href="#">Developer</a></li>
+		</ul>
+			</div>
+		</div>
+	<div id="content">
+		<div class="container">
+			<div id="member">
+				<div id="login">
+					<span>
+						Welcome&nbsp;/&nbsp;
+						<a href="#">Register</a>
+						&nbsp;/&nbsp;
+						<a href="#">Login</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="contentlock">
+	<div id="topdiv">
+		<div id="topdivHeader">
+        	<div id="Hicon">
+			<img src="icon1.jpg"height="58"width="64"margin-left="20px"/>
+            </div>
+            <div id="settitle">
+			<div id="locktitle">
+			<span id="titlecss"><b>Group 1</b></span></div>
+			<div id="lockpurchase"><a href="#"target="_blank"title="Purchase"><img Src="subbtn4.png"height="56"width="160"/></a>
+			<a href="#"target="_blank"title="Purchase"><img Src="join.png"height="60"width="160"/></a>
+			<span id="purc"><a href="#"target="_blank"title="Purchase"><b></b></a></span>
+			<br><div id="gameprice"><b></b></div></div>
+			</div><!--End of header title division-->
+			
+			<div id="titleExB">
+			</div><!--Title Blue Line-->
+			<div id="topDivBackg">
+			<div id="topdivDescrip">
+			<form name="GRating">
+			<table width="105%" border="0" cellpadding="6">
+				<tr>
+					<td>Members
+					<td>1
+				<tr>
+					<td>Established
+					<td>Jan 11,2015
+				<tr>
+					<td>Privacy
+					<td>Public
+				<tr>
+					<td>Company
+					<td>Null</b></a>
+				<tr>
+					<td>Homepage
+					<td><a href="#"target="_blank"title="GHomePage" style="color: white"><b>RandomHome.com</b></a>
+				<tr>
+					<td>Contact
+					<td><a href="#"target="_blank"title="DevContact" style="color: white"><b>Send Message</b></a>
+				<tr>
+					<td>Email
+					<td>Hidden
+				<tr>
+					<td>
+					<td>
+				<tr>
+					<td>
+					<td>
+				<tr>
+					<td>
+					<td>
+				<tr>
+					<td>
+					<td>
+				<tr>
+					<td>
+					<td>
+				</table>
+			</form>
+				</div><!--Top division game description division-->
+				</div><!--top division description there background-->
+
+
+				<br>
+				<br>
+			<div id="SummaryDivision">
+			<div id="SumNavBar">
+			<ul class="tablist"> 
+				<li><a href="#">Summary</a></li> 
+				<li id="current"><a href="#">Members</a></li> 
+				<li><a href="#">Games</a></li> 
+				<li><a href="#">Tabs 4</a></li> 
+			</ul>
+			</div><!--Nav bar-->
+			<div id="SummaryDescrip">
+			<br>Group 1 creates games that focus on depth and lasting playability. 
+			<br>We try to make our games more stuffed with monsters, spells and items than any other games on the market. 
+			<br>Animation sequences are kept simple to enable us to increase the number of features in the games.
+			<br><br>
+			<br>We also consider games to be more fun if you can play against another human opponent. 
+			<br>Our games reflects this and enables many players to compete against each other.
+			<br><br>
+			<br>Currently we are developing Battlefield 4.
+<br>
+			</div><!--Summary Description-->
+			<div id="CommentSec">
+			<h1 style="background-color:black;color:white;margin-top:-18px;margin-left:-20px;width:1050px;">Comments</h1>
+			<p><span style="color:red">Mow</span>
+			<br>I think this game is worth buying</p>
+			<br>
+			<p><span style="color:red">Philips</span><br>
+			Yo, looking for FPS game for long, at last Battlefield decide to make another episode.</p>
+			<br>
+			<p><span style="color:red">Yeo</span>
+			<br>Fun to play, fun to kill, this is a game for FPS lover</p>
+			<br>
+			<p><span style="color:red">Terra</span><br>
+			Best game ever</p>
+			<form name="comment">
+			<br><textarea name="GSummary" cols="80" rows="5" maxlength="1000"></textarea>
+			<br><br><input type="submit" name="btnsubmit" value="Comment"/>
+			</form>
+			</div><!--Comment div-->
+			</div><!--Summary division-->
+			</div><!--Header division-->
+			</div><<!--Top division-->
+
+
+</div><!--Content Lock-->
+</div><!--Body-->
