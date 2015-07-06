@@ -1,0 +1,33 @@
+body{background-image:url("background.jpg")}
+#body 
+		{
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color: #929292;
+	height: 0px;
+	margin-top: 10px;
+	margin-left: 3px;
+	margin-bottom: -27px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+		}
+#boxes{padding:0
+38px;position:relative;text-align:center;margin:auto}
+#boxesloader{color:#000;font-size:1.6em;padding:100px
+0 140px;text-align:center}
+#boxesloader a:hover{color:#ee3434;font-weight:bold}
+#boxesholder{background-color:rgba(255,255,255,0.7);clear:both;height:300px;margin-left:200px;
+auto;overflow:hidden;position:relative;text-align:left}
+#boxesinternal{position:absolute;top:0;}
+#games{
+	margin-top: 34px
+}
+#game1{margin-left:100px}
+#game2{
+	margin-left: 390px;
+	margin-top: -327px
+}
+#game3{
+	margin-left: 745px;
+	margin-top: -289px
+}

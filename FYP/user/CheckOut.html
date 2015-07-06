@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CheckOut</title>
+</head>
+<body>
+<table id="checkout-cart" class="shopping-cart" border="1">
+	<thead>
+		<tr>
+			<th scope="col">Item</th>
+			<th scope="col">Qty</th>
+			<th scope="col">Price</th>
+			<th scope="col">Disc</th>
+		</tr>
+		<tr>
+		    <td>BattleField 4</td>
+			<td> 1 </td>
+			<td> RM 25 </td>
+			<td><input type="checkbox" name="disc"/></td>
+		</tr>
+		<tr>
+		    <td>SDO Season 3</td>
+			<td> 1 </td>
+			<td> RM 20 </td>
+			<td><input type="checkbox" name="disc"/></td>
+		</tr>
+		
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+<div id="pricing">
+
+	<p id="sub-total">
+		<strong>Total</strong>: RM 45<span id="stotal"></span>
+	</p>
+</div>
+
+<form action="order.html" method="post" id="checkout-order-form">
+	<h2>Your Details</h2>
+		<fieldset id="fieldset-billing">
+			<legend>Billing</legend>
+				<!-- Name, Email, City, Address, ZIP Code, Country (select box) -->
+
+<div>
+	<label for="name">Name</label>
+	<input type="text" name="name" id="name" data-type="string" data-message="This field may not be empty" />
+</div>
+
+<div>
+	<label for="email">Email</label>
+	<input type="text" name="email" id="email" data-type="expression" data-message="Not a valid email address" />
+</div>
+<div>
+     <label for="phone">HP.number</label>
+	 <input type="text" name="phone" data-type="expression" data-message="Not a valid phone number"/>
+</div>
+
+<div>
+	<label for="city">City</label>
+	<input type="text" name="city" id="city" data-type="string" data-message="This field may not be empty" />
+</div>
+
+<div>
+	<label for="address">Address</label>
+		<input type="text" name="address" id="address" data-type="string" data-message="This field may not be empty" />
+</div>
+
+<div>
+	<label for="zip">ZIP Code</label>
+	<input type="text" name="zip" id="zip" data-type="string" data-message="This field may not be empty" />
+</div>
+
+<div>
+	<label for="country">Country</label>
+		<select name="country" id="country" data-type="string" data-message="This field may not be empty">
+			<option value="">Select</option>
+			<option value="MYS">Malaysia</option>
+		</select>
+</div>
+
+<div>
+      <label for="state">State</label>
+	  <select name="state">
+	        <option value="">Select</option>
+			<option value="Johor">Johor</option>
+			<option value="Kedah">Kedah</option>
+			<option value="Kelantan">Kelantan</option>
+			<option value="Malacca">Malacca</option>
+			<option value="Negeri Sembilan">Negeri Sembilan</option>
+			<option value="Pahang">Pahang</option>
+			<option value="Perak">Perak</option>
+			<option value="Perlis">Perlis</option>
+			<option value="Penang">Penang</option>
+			<option value="Sabah">Sabah</option>
+			<option value="Sarawak">Sarawak</option>
+			<option value="Selangor">Selangor</option>
+			<option value="Terengganu">Terengganu</option>
+			<option value="wilayah persekutuan">Wilayah Persekutuan</option>
+	  </select>
+</div>
+			
+</fieldset>
+
+<div id="Order_review-same">Same as Billing <input type="checkbox" id="same-as-billing" value=""/></div>
+
+<fieldset id="fieldset-Order_review">
+<legend>Order review</legend>
+	<table id="checkout-cart" class="shopping-cart">
+	<thead>
+		<tr>
+			<th scope="col">Item</th>
+			<th scope="col">Qty</th>
+			<th scope="col">Price</th>
+			
+		</tr>
+		<tr>
+		    <td>BattleField 4</td>
+			<td> 1 </td>
+			<td> RM 25 </td>
+			
+		</tr>
+		<tr>
+		    <td>SDO Season 3</td>
+			<td> 1 </td>
+			<td> RM 20 </td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+</fieldset>
+
+<p><input type="submit" id="submit-order" value="Submit" class="btn" /></p>
+ 
+</form>
+</body>
+</html>
