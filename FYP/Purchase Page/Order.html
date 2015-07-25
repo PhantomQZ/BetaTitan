@@ -1,8 +1,8 @@
-<!doctype html>
+<?php 
+include("conn.php");
+?>
+<!DOCTYPE html>
 <html>
-<head>
-<title>Untitled Document</title>
-</head>
 <style>
 #header{
 	background: #191919 url(/borderless/images/default/bg_header.png) repeat-x center top;
@@ -41,6 +41,12 @@
 	display: block;
 }
 body{	background-image:url(background.jpg);}
+#tables
+{
+	 background-color:rgba(255,255,255,0.3);
+	 margin: 80px auto; 
+	 
+}
 </style>
 <link rel="stylesheet" type="text/css" href="PurchaseC.css">
 <body>
@@ -72,38 +78,45 @@ body{	background-image:url(background.jpg);}
 			</div>
 	</div>
 </div>
-<div id="ContentLock">
-  <div id="PContent">
-    <br>
-    <h1 class="style1"><img src="sdo_icon.png"height="82"width="90"/> Super Dancer Online X 3</h1>
-    <a href="#"><img src="sod3.jpg" width="387" height="344"></a> 
-    </div>
-    <div id="PButton">
-    <br>
-    <h2 style="text-align:center">Purchase Option</h2>
-    <form>
-    <button type="button" onclick="order()"><h3>PURCHASE GAME</h3></button>
-    <br>Purchase the game access code to download and play the game directly.
-    <br><br>
-    <button type="button" onclick="order()"><h3>PURCHASE GAME WITH DISC COPY</h3></button>
-    <br>Purchase the game access code and a extra copy of original disc.
-    <br><br>
-    <button type="button" onclick="order()"><h3>PURCHASE GAME WITH BUNDLE</h3></button>
-    <br>Purchase the game with extra items. <br>Item Included : Wallpaper, Original Disc, SDO - Cap
-    </form>
-    </div>
-    </div>
+<head>
+<title>Order</title>
+</head>
+<body>
+<div>
+<h1 align="center"><u>Your Order</u></h1>
+<div id="tables" style="width:400px;">
+<table border="1" width="100%">
+<tr>
+	<th>Game</th>
+	<th>Quatity</th>
+	<th>Price</th>
+</tr>
+<?php
+
+	$sql = "select * from orders";
+	$result = mysqli_query($conn, $sql);
+	
+	while($row = mysqli_fetch_assoc($result))
+	{	
+?>
+<tr>
+		<td><?php echo $row["Game_name"]; ?></td>
+		<td><?php echo $row["Quantity"]; ?></td>
+		<td><?php echo $row["Game_price"]; ?></td>
+</tr>
+<?php
+	}
+	
+?>
+</table>
+
+<div id="user-details">
+	<h2 align="center">Your Data</h2>
+		<div id="user-details-content"></div>
 </div>
-<p>&nbsp;</p>
-<script>
-function order(){
-var r=confirm("Do you want add to cart?")
-if(r==true){
-}
-else{
-window.location.href = 'Order.html'; 
-}
-}
-</script>
+<div style="text-align:center;">
+<input type="submit" name="payment"  class="btn" value="Pay" />
+</div>
+</div>
 </body>
 </html>

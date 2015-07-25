@@ -82,18 +82,28 @@ body{	background-image:url(background.jpg);}
     <br>
     <h2 style="text-align:center">Purchase Option</h2>
     <form>
-    <button type="button"><h3>PURCHASE GAME</h3></button>
+    <button type="button" onclick="order()"><h3>PURCHASE GAME</h3></button>
     <br>Purchase the game access code to download and play the game directly.
     <br><br>
-    <button type="button"><h3>PURCHASE GAME WITH DISC COPY</h3></button>
+    <button type="button" onclick="order()"><h3>PURCHASE GAME WITH DISC COPY</h3></button>
     <br>Purchase the game access code and a extra copy of original disc.
     <br><br>
-    <button type="button"><h3>PURCHASE GAME WITH BUNDLE</h3></button>
+    <button type="button" onclick="order()"><h3>PURCHASE GAME WITH BUNDLE</h3></button>
     <br>Purchase the game with extra items. <br>Item Included :Original Disc, BF4 T-Shirt, BF4 - HeadGear
     </form>
     </div>
     </div>
 </div>
 <p>&nbsp;</p>
+<script>
+function order(){
+var r=confirm("Do you want add to cart?")
+if(r==true){
+}
+else{
+window.location.href = 'Order.html'; 
+}
+}
+</script>
 </body>
 </html>
