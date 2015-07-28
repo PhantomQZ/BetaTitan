@@ -79,47 +79,10 @@ body{	background-image:url(background.jpg);}
 	</div>
 </div>
 <head>
-<title>Order</title>
+<title>Payment</title>
 </head>
 <body>
-<div>
-<h1 align="center"><u>Your Order</u></h1>
-<div id="tables" style="width:400px;">
-<table border="1" width="100%">
-<tr>
-	<th>Game</th>
-	<th>Quatity</th>
-	<th>Price</th>
-</tr>
-<?php
-
-	$sql = "select * from orders";
-	$result = mysqli_query($conn, $sql);
-	
-	while($row = mysqli_fetch_assoc($result))
-	{	
-?>
-<tr>
-		<td><?php echo $row["Game_name"]; ?></td>
-		<td><?php echo $row["Quantity"]; ?></td>
-		<td><?php echo $row["Game_price"]; ?></td>
-</tr>
-<?php
-	}
-	
-?>
-</table>
-
-<div id="user-details">
-	<h2 align="center">Your Data</h2>
-		<div id="user-details-content"></div>
-</div>
-<div style="text-align:center;">
-<form action="payment.html">
-    <input type="submit" name="payment"  class="btn" value="Pay" action="payment.html"/>
-</form>
-</div>
-</div>
-
-</body>
-</html>
+<h1 align="center">Your Payment</h1>
+<div id="tables">
+<form>
+<

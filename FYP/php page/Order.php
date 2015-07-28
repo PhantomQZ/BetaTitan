@@ -115,11 +115,8 @@ body{	background-image:url(background.jpg);}
 		<div id="user-details-content"></div>
 </div>
 <div style="text-align:center;">
-<form action="payment.html">
-    <input type="submit" name="payment"  class="btn" value="Pay" action="payment.html"/>
-</form>
+<input type="submit" name="payment"  class="btn" value="Pay" />
 </div>
 </div>
-
 </body>
 </html>

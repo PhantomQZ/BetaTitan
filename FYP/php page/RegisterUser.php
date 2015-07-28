@@ -41,11 +41,11 @@
 #regisbackg{
 	background-image: url(Registerb.jpg);
 	background-repeat: no-repeat;
-	background-size:1120px;
+	background-size:1120px 750px;
 	text-align: left;
 	width:1352px;
 	margin-left:100px;
-	height:700px;
+	height:760px;
 	margin-top:80px;
 }
 #regisform
@@ -101,26 +101,38 @@ margin-top:-58px;
 <form name="register" method="post" action="successfulregister.php">
 <table width="105%" border="0" cellpadding="6">
   <tbody text-align: left;">
-    <tr>
+	<tr>
+      <td><label for="CusFirstName">First Name :</label></td>
+      <td style="text-align: left"><input name="CusFirstName" type="text" required id="CusFirstName" placeholder="First Name" size="25" maxlength="20"></td>
+    </tr>
+	<tr>
+      <td><label for="CustLastName">Last Name :</label></td>
+      <td style="text-align: left"><input name="CustLastName" type="text" required id="CustLastName" placeholder="Last Name" size="25" maxlength="20"></td>
+    </tr>
+	<tr>
       <td><label for="CustUsername">Username :</label></td>
-      <td style="text-align: left"><input name="CustUsername" type="text" required id="CustUsername" placeholder="Username" size="25" maxlength="15"></td>
+      <td style="text-align: left"><input name="CustUsername" type="text" required id="CustUsername" placeholder="Username" size="25" maxlength="16"></td>
     </tr>
     <tr>
       <td><label for="CustPass">Choose a Password :</label></td>
-      <td style="text-align: left"><input name="CustPass" type="password" required id="CustPass" placeholder="Password" size="25" maxlength="15"></td>
+      <td style="text-align: left"><input name="CustPass" type="password" required id="CustPass" placeholder="Password" size="25" maxlength="20"></td>
     </tr>
 	<tr>
       <td><label for="ConfirmPass">Re-enter Password :</label></td>
-      <td style="text-align: left"><input name="ConfPass" type="password" required id="ConfPass" placeholder="Re-enter Password" size="25" maxlength="15"></td>
+      <td style="text-align: left"><input name="ConfPass" type="password" required id="ConfPass" placeholder="Re-enter Password" size="25" maxlength="20"></td>
+    </tr>
+	<tr>
+      <td><label for="Custemail">Email :</label></td>
+      <td style="text-align: left"><input name="Custemail" type="text" required id="Custemail" placeholder="Email Address" size="25" maxlength="35"></td>
     </tr>
     <tr>
     <tr>
     <td><label for="phone">Hp_Number: </label></td>
-	<td><input type="text" name="phone" data-type="expression" size="25" data-message="Not a valid phone number"/></td>
+	<td><input type="text" name="phone" data-type="expression" size="25" maxlength="11" data-message="Not a valid phone number"/></td>
 </tr>
 <tr>
     <td><label for="address">Address: </label></td>
-	<td><input type="text" name="address" id="address" data-type="string" size="25" data-message="This field may not be empty" /></td>
+	<td><input type="text" name="address" id="address" data-type="string" size="25" maxlength="50" data-message="This field may not be empty" /></td>
 </tr>
 <tr>
     <td><label for="zip">ZIP Code: </label></td>
@@ -161,12 +173,12 @@ margin-top:-58px;
       <td>Choose a Question :</td>
       <td style="text-align: left"><select name="SQuestion" width="250" style="width: 250px">
 									<option value="Null">Select One
-									<option value="SN">What is the name of your school?
-									<option value="FV">What is your favorite team?
-									<option value="MMN">What is your mother's maiden name?
-									<option value="PN">What is the name of your pet?
-									<option value="CH">Who was your childhood hero?
-									<option value="CB">What city were you born in?
+									<option value="1">What is the name of your school?
+									<option value="2">What is your favorite team?
+									<option value="3">What is your mother's maiden name?
+									<option value="4">What is the name of your pet?
+									<option value="5">Who was your childhood hero?
+									<option value="6">What city were you born in?
 	  </td>					
     </tr>
 	<tr>
