@@ -123,7 +123,7 @@ margin-top:-58px;
     </tr>
 	<tr>
       <td><label for="Custemail">Email :</label></td>
-      <td style="text-align: left"><input name="Custemail" type="text" required id="Custemail" placeholder="Email Address" size="25" maxlength="35"></td>
+      <td style="text-align: left"><input name="Custemail" type="email" required id="Custemail" placeholder="Email Address" size="25" maxlength="35"></td>
     </tr>
     <tr>
     <tr>
