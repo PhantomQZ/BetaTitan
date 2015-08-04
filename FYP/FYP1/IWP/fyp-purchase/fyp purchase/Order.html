@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order</title>
+<style>
+body
+{
+background-color:black;
+color:black;
+font-size:20px;
+font-weight:bold;
+
+}
+.image{background-image:url('image2.jpg');
+width:1250px;
+height:550px;
+margin:0 auto;
+margin-top:50px;
+margin-left:50px;
+position:fixed;
+top:0;
+left:0;}
+.style{width:500px;position:center;margin:0 auto;margin-top:50px;background-color:rgba(255,255,255,0.6);}
+#paypal-form{text-align:center;}
+#sub-total{text-align:center;}
+</style>
+</head>
+<body>
+<div class="image">
+<div class="style">
+<fieldset style="border-color:black;">
+<h1 style="text-align:center">Your Order</h1>
+
+<div style="width:400px;margin:0 auto;">
+<fieldset>
+
+<table id="checkout-cart" class="shopping-cart"border="1" style="margin:0 auto;">
+	<thead>
+		<tr>
+			<th scope="col">Item</th>
+			<th scope="col">Qty</th>
+			<th scope="col">Price</th>
+			<th scope="col">Disc</th>
+			
+		<tr>
+		    <td>BattleField 4</td>
+			<td> 1 </td>
+			<td> RM 25 </td>
+			<td>Yes</td>
+			
+		</tr>
+		<tr>
+		    <td>SDO Season 3</td>
+			<td> 1 </td>
+			<td> RM 20 </td>
+		    <td>No</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+
+<div id="pricing"width="100">
+
+	<p id="sub-total">
+		<strong>Total</strong>: RM 45<span id="stotal"></span>
+	</p>
+</div>
+</fieldset>
+</div>
+
+<div id="user-details">
+	<h2 style="text-align:center">Your Data</h2>
+		<div id="user-details-content"></div>
+</div>
+
+
+<form id="paypal-form" action="" method="post">
+	<input type="hidden" name="cmd" value="_cart" />
+	<input type="hidden" name="upload" value="1" />
+	<input type="hidden" name="business" value="" />
+
+	<input type="hidden" name="currency_code" value="" />
+	<input type="submit" id="credit-btn" class="btn" value="Pay with credit card" />
+</form>
+</fieldset>
+</div>
+</div>
+</body>
+</html>

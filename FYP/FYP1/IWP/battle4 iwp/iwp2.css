@@ -1,0 +1,119 @@
+body{
+	
+	background-color: black;
+	background-position: top;
+	
+	
+}
+.back{
+     background-image: url(battlefield_3_tanklar.jpg);
+	 background-repeat: no-repeat;
+	 background-attachment: float;
+	 }
+.head{
+    background-image: url(battlefield_3_tanklar.jpg);
+	background-color: #191919;
+	height: 67px;
+	margin-top: 52px;
+	width: 1335px;
+	margin-right: -966px;
+	color: rgba(255,255,255,1.00);
+}
+.headpic{
+	width: 71px;
+	height: 97px;
+	margin-left: 16px;
+	margin-bottom: 48px;
+}
+.frame{
+	background-color: rgba(255,255,255,0.6);
+	border:groove;
+        border-color:#191919}
+         
+.style1{
+	color: darkred;
+	font-family: Arial Black;
+	letter-spacing: 18px;
+	font-size: 2em;
+	margin-left: 180px;
+	width: 0px;
+	width: 0px;
+	width: 0px;
+	height: 0px;
+	margin-top: -150px;
+}
+.style2{
+	font-style:bold;
+	text-decoration: underline;
+	height: 0px;
+	padding-right: 0px;
+	float: right;
+	margin-top: -38px;
+	padding-left: 93pxx;
+	background-color:none;
+	
+}
+.style3{font-family:Arial Black;text-align:left;font-family:italic;color:white;font-size:18px;background-color:rgba(0,0,0,0.8);}
+.style4{
+	background-color: rgba(255,255,255,0.6);
+	text-decoration: none;
+	text-align: center;
+	margin-left: 210px;
+	float: left;
+	position: absolute;
+	left: -193px;
+	top: 1234px;
+	margin-top: -260px;
+}
+.style5{
+	text-decoration: underline;
+	position: absolute;
+	width: 550px;
+	height: 361px;
+	left: 20px;
+	top: 1865px;
+	margin-left: 50px;
+	margin-top: -480px;
+}
+.braket{background-color:gray;}
+.side{float:left;}
+.hor{
+	overflow: auto;
+	text-align: left;
+	width: 700px;
+	height: 280px;
+	word-spacing: 2.5px;
+	font-size: 28px;
+	position: relative;
+	left: auto;
+	margin-left: 20px;
+	margin-top: 48px;
+}
+.scrollup{text-indent: -9999px;display:normal;text-align:center;}
+.hyper{
+	color: yellow;
+	position: right-side;
+	top: -180px;
+	width: 100px;
+	margin-left: 1080px;
+}
+.purchase{
+	color: white;
+	width: 20px;
+	height: 3px;
+	margin-bottom: 20px;
+	margin-left: 1250px;
+	padding-top: 0px;
+	margin-top: -7px;
+}
+.style6{position:relative;}
+.style7{
+	background-image: url(bf4-final-stand-hangar.jpg);
+	background-attachment: float;
+	background-repeat: no-repeat;
+	height: 700px;
+}
+
+#bottom-footer{color:white;text-align:center;font-family:Arial Narrow;font-size:9pt;
+	
+}
