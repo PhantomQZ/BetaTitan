@@ -1,0 +1,21 @@
+.style1{
+	color: darkred;
+	font-family: Arial Black;
+	letter-spacing: 18px;
+	font-size: 4em;
+}
+
+#PContent{
+	width: 900px;
+	margin-left: 140px;
+}
+
+#PButton{
+	background-color: rgba(255,255,255,0.3);
+	width: 500px;
+	float: right;
+	margin-top: -350px;
+}
+#ContentLock{
+	width:1150px;
+}

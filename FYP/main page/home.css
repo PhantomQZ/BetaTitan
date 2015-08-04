@@ -1,0 +1,102 @@
+body{
+	
+	background-color: black;
+	background-image: url(background.jpg);
+	background-position: top;
+	
+	
+}
+#container {
+	width: 824px;
+	margin-left:50px;
+	
+	position: relative;
+}
+
+h1 {
+	width: 0px;
+	height: 226px;
+	margin: 0 auto;
+	position: relative;
+	top: 0px;
+	background: url(harley-logo.png);
+	text-indent: -9999px;
+	z-index: 10;
+}
+
+div#slideshow {
+	width: 1250px;
+	height: 400px;
+	padding: 0px 0px 0px 0px;
+	overflow: scroll; /* Allows the slides to be viewed using scrollbar if Javascript isn't available */
+	position: relative;
+	z-index: 5;
+}
+	div#slideshow ul#nav {
+	display: none;
+	list-style: none;
+	position: relative;
+	top: 170px;
+	z-index: 15;
+	}
+		div#slideshow ul#nav li#prev {
+	float: left;
+	margin: 0 0 0 10px;
+		}
+		div#slideshow ul#nav li#next {
+	float: right;
+	margin: 0 33px 0 0;
+		}
+		div#slideshow ul#nav li a {
+			display: block; width: 80px; height: 80px; text-indent: -9999px;
+		}
+			div#slideshow ul#nav li#prev a {
+				background: url(prev.png);
+			}
+			div#slideshow ul#nav li#next a {
+				background: url(next.png);
+			}
+
+	div#slideshow ul#slides {
+		list-style: none;
+	}
+		div#slideshow ul#slides li {
+			margin: 0 0 20px 0;
+		}
+#size{
+	color:black;
+	float:left;
+	width:400px;
+	height:300px;
+	padding-left:50px;
+	padding-top:20px;
+	margin-bottom:20px;
+	border-color:black;
+	}
+#size2{color:black;
+	float:right;
+	width:820px;
+	
+	padding-right:50px;
+	padding-top:20px;
+	
+	}
+#game1{margin-left:20px}
+#game2{
+	margin-top:-80px;
+	margin-left:200px;
+}
+#game3{
+	margin-left: 305px;
+	margin-top: -330px
+}
+#footer{
+	
+	height: 60px;
+	margin-top:510px;
+	margin-bottom:-20px;
+	padding-left:40px;
+	
+}
+
+a {outline: none; }
