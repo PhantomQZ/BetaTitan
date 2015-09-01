@@ -1,5 +1,7 @@
-<?php    include("conn.php");    
-$result = mysqli_query($conn, "select * from user where User_ID='3' ");
+<?php    
+include("conn.php");
+$user_check = $_SESSION['login_user'];    
+$result = mysqli_query($conn, "select * from user where User_usrname LIKE '$user_check' ");
 $row = mysqli_fetch_assoc($result);
  
 ?>
@@ -50,13 +52,13 @@ $row = mysqli_fetch_assoc($result);
   <div id="header">
 			<div class="container">
 			<h1>Titan Games</h1>
-			<a href="#" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
-			<ul id="menu">
-			<li><a href="#">Games</a></li>
-			<li><a href="#">Community</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Support</a></li>
-            <li><a href="#">Developer</a></li>
+			<a href="main.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
+		<ul id="menu">
+		<li><a href="#">Games</a></li>
+		<li><a href="#">Community</a></li>
+		<li><a href="AboutUs.php">About Us</a></li>
+		<li><a href="#">Support</a></li>
+        <li><a href="developer.php">Developer</a></li>
 		</ul>
 			</div>
 		</div>
@@ -65,29 +67,49 @@ $row = mysqli_fetch_assoc($result);
 			<div id="member">
 				<div id="login">
 					<span>
-						Welcome&nbsp;/&nbsp;
-						<a href="#">Register</a>
-						&nbsp;/&nbsp;
-						<a href="#">Login</a>
+						<?php
+							$link1 = 'RegisterUser.php';
+							$link2 = 'loginpage.php';
+							$link3 = 'logout.php';
+							$link4 = 'edit_profile.php';
+							if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+							{
+								
+								echo "Welcome &nbsp;";
+								echo $_SESSION['login_user'];
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link4."'>Edit Profile</a>";
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link3."'>Log Out</a>";
+							}
+							else
+								{
+								echo "Welcome &nbsp;/&nbsp; </i>";
+								echo "<a href='".$link1."'>Register</a>&nbsp;/&nbsp;";
+								echo "<a href='".$link2."'>Login</a>";
+								}
+							?>
 					</span>
 				</div>
 			</div>
 		</div>
-  </div>
+	</div>
 		<br>
 <div>
     <div style="background-color:red;margin-left:150px;margin-right:300px;padding-left:50px;">
     <h1>Edit Profile</h1>
   	<hr>
 	</div>
-	<fieldset style="margin-left:150px;margin-right:300px;background-color:white;">
+	<fieldset style="margin-left:150px;margin-right:300px;background-color:white;" >
 	<div style="float:left;margin-left:70px;margin-top:50px;">
       <div>
         <div>
-          <img src="//placehold.it/300" class="avatar img-circle" alt="avatar" value="image">
-          <h6>Upload a different photo...</h6>
-          
-          <input type="file" class="form-control" value="image" >
+			<img src="<?php echo $row["image"]?>" height="300" width="300" class="avatar img-circle" alt="avatar" value="image">
+				<form action="upload.php" method="post" enctype="multipart/form-data">
+				<h5>Select image to upload: </h5>
+				<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+				<input type="submit" value="Upload Image" name="submit">
+			</form>
         </div>
       </div>
 	</div>
@@ -95,7 +117,7 @@ $row = mysqli_fetch_assoc($result);
         <h2>Personal info</h2>
 		
         <fieldset style="width:300px;">
-        <form name="personal" role="form" method = "POST">
+        <form name="personal" role="form" method = "POST" action="successfulupdate.php">
 		<div>
             <label>First name :</label>
             <div>
@@ -112,7 +134,15 @@ $row = mysqli_fetch_assoc($result);
           <div class="form-group">
             <label class="col-lg-3 control-label">Email :</label>
             <div class="col-lg-8">
-              <input class="form-control" type="" name="Custemail" size="25" value="<?php echo $row["User_email"]; ?>"><br>
+              <input class="form-control" type="email" name="Custemail" id="Custemail" size="25" value="<?php echo $row["User_email"]; ?>"><br>
+			 
+            </div>
+          </div>
+		  <div class="form-group">
+            <label class="col-lg-3 control-label">Re-enter Email :</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="email" name="Confemail" id="Confemail" size="25" value="<?php echo $row["User_email"]; ?>"><br>
+			 
             </div>
           </div>
           <div class="form-group">
@@ -151,8 +181,8 @@ $row = mysqli_fetch_assoc($result);
 		   <label>Country</label>
 		    <div>
 			<select name="Country" size="1">
-		
-			<option value="Malaysia"<?php echo ($row == "Malaysia")?  '$row="selected"' : ''; ?>>Malaysia</option>
+			<option value="<?php echo $row["User_country"];?>"selected><?php echo $row["User_country"]; ?></option>
+			<option value="Malaysia">Malaysia</option>
 			<option value="Singapore">Singapore</option>
 			<option value="Thailand">Thailand</option>
 			<option value="Indonesia">Indonesia</option>
@@ -164,7 +194,7 @@ $row = mysqli_fetch_assoc($result);
 		   <label>State</label>
 		    <div>
 			 <select name="State" style="width:173px;">
-	        <option value="" disabled selected><?php echo $row["User_state"]; ?></option>
+	        <option value="<?php echo $row["User_state"];?>"selected><?php echo $row["User_state"]; ?></option>
 			<option value="Johor">Johor</option>
 			<option value="Kedah">Kedah</option>
 			<option value="Kelantan">Kelantan</option>
@@ -191,7 +221,7 @@ $row = mysqli_fetch_assoc($result);
 </fieldset>
 </div>
 <script>
-	var password = document.getElementById("CustPass"), confirm_password = document.getElementById("ConfPass");
+	var password = document.getElementById("CustPass"), confirm_password = document.getElementById("ConfPass"), email = document.getElementById("Custemail"), confirm_email = document.getElementById("Confemail");;
 	function validatePassword(){
 		if(password.value != confirm_password.value) {
 			confirm_password.setCustomValidity("Passwords Don't Match");
@@ -200,27 +230,22 @@ $row = mysqli_fetch_assoc($result);
 			confirm_password.setCustomValidity('');
 		}
 }
+	function validateEmail(){
+		if(email.value != confirm_email.value) {
+			confirm_email.setCustomValidity("Email Don't Match");
+		} 
+		else {
+			confirm_email.setCustomValidity('');
+		}
+}
 
 	password.onchange = validatePassword;
 	confirm_password.onkeyup = validatePassword;
+	email.onchange = validateEmail;
+	confirm_email.onkeyup = validateEmail;
 </script>
 </div>
 
-<?php
-if (isset($_POST["submit"]))
-    {	
-		$cfname =$_POST["CusFirstName"];
-		$clname =$_POST["CustLastName"];
-		$cpass = $_POST["CustPass"];
-		$cemail = $_POST["Custemail"];
-		$ucontact = $_POST["Contact"];
-		$caddress = $_POST["Address"];
-		$state = $_POST["State"];
-		$postcode = $_POST["Postcode"];
-		$country = $_POST["Country"];
-        mysqli_query($conn, "update user set User_pswrd='$cpass', User_Fname='$cfname', User_Lname='$clname', User_email='$cemail', User_contact='$ucontact', User_address='$caddress', User_state='$state', User_postcode='$postcode', User_country='$country' where User_ID='3' ");
-    }
-?>
 </body>
 </html>
 
