@@ -102,6 +102,8 @@ $cname=$res['User_usrname'];
 $cpwd=$res['User_pswrd'];
 $uemail=$res['User_email'];
 require 'PHPMailerAutoload.php';
+require 'class.smtp.php';
+require 'class.phpmailer.php';
 
 $mail = new PHPMailer;
  
@@ -114,7 +116,7 @@ $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl
 $mail->Port = 465;                                    //Set the SMTP port number - 587 for authenticated TLS
 $mail->setFrom('titiangaming123@gmail.com', 'Titan_Gaming');     //Set who the message is to be sent from
 //$mail->addReplyTo('cdpcyb.test@gmail.com', 'Cdp Cyberjaya');  //Set an alternative reply-to address
-$mail->AddAddress($uemail, $cname);     // Add a recipient
+$mail->AddAddress('$mail');     // Add a recipient
 //$mail->addAddress('mereka@example.com');              // Name is optional
 //$mail->addCC('cc@example.com');
 //$mail->addBCC('bcc@example.com');
@@ -123,19 +125,18 @@ $mail->addAttachment('c:/Attachment/head-xampp.gif');         // Add attachments
 $mail->addAttachment('c:/Attachment/The PHP.docx', 'The Php'); // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = "Welcome To Online IT Product";
+$mail->Subject = "Password Recovery";
 $mail->AddEmbeddedImage('C:/xampp/htdocs/IT/images/BetaTitan.png', 'logoimg', 'BetaTitan.png');
 $mail->Body    = "<html>
 <body style=\"margin: 10px;\">
-<div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\">
+<div style=\"width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 15px;\">
 <div align=\"center\"><p><img src=\"cid:logoimg\" /></p></div><br>
 <br>
-&nbsp;Successfully registration<br>
-<br>
+
 Account information: <br>
 Username : ' . $cname . ' <br>
 Password : ' . $cpwd . ' <br><br>
-You may start shop at out Online IT store now.
+You may start shop at our Titan_Gaming Online Games Store now.
 
 <br> More interesting product with affordable price are waiting for you!
 
@@ -144,7 +145,7 @@ You may start shop at out Online IT store now.
 </div>
 </body>
 </html>";
-$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+$mail->AltBody = "This is an email to help you remind your password.";
 //$body             = file_get_contents('contents.html');
 //$body             = preg_replace('/\\\\/','', $body);
 
