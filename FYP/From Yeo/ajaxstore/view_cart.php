@@ -7,7 +7,7 @@ setlocale(LC_MONETARY,"en_US"); // US national format (see : http://php.net/mone
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Review Your Cart Before Buying</title>
+<title></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -47,9 +47,12 @@ if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){
 	
 	//Print Shipping, VAT and Total
 	$cart_box .= "<li class=\"view-cart-total\">$shipping_cost  $list_tax <hr>Payable Amount : $currency ".sprintf("%01.2f", $grand_total)."</li>";
+	$cart_box .= "&nbsp;";
+	$cart_box .= '<li style="float:right;font-size:18pt;""><u><a href="checkout.php?process=true" title="Proceed to payment">Check-out</a></u></li>';
 	$cart_box .= "</ul>";
 	
 	echo $cart_box;
+	
 }else{
 	echo "Your Cart is empty";
 }
