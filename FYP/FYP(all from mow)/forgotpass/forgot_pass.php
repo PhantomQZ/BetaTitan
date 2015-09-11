@@ -116,7 +116,7 @@ $mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl
 $mail->Port = 465;                                    //Set the SMTP port number - 587 for authenticated TLS
 $mail->setFrom('titiangaming123@gmail.com', 'Titan_Gaming');     //Set who the message is to be sent from
 //$mail->addReplyTo('cdpcyb.test@gmail.com', 'Cdp Cyberjaya');  //Set an alternative reply-to address
-$mail->AddAddress('$mail');     // Add a recipient
+$mail->AddAddress("$uemail");     // Add a recipient
 //$mail->addAddress('mereka@example.com');              // Name is optional
 //$mail->addCC('cc@example.com');
 //$mail->addBCC('bcc@example.com');
