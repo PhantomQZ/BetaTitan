@@ -18,6 +18,9 @@
 </script>
 <?php 
 	$conn = mysqli_connect("localhost","root","","game_store");
+	$devid = $_GET["dev"];
+	$b = mysqli_fetch_assoc(mysqli_query($conn,"select * from developer_group where Dev_ID = '$devid' "));
+	$titlen = $b['Dev_Group_Name'];
 ?>
 <html>
 <head>
@@ -113,14 +116,6 @@ text-decoration:none;}
 	background-color: rgba(55,55,55,1.06);
 	margin-top: -20px;
 }
-#ContectLock{
-	height: 491px;
-	width: 1000px;
-	margin-left: 147px;
-	background-image: url(background02.jpg);
-	background-repeat: no-repeat;
-	background-size:cover;
-}
 
     </style>
 </head>
@@ -130,14 +125,14 @@ text-decoration:none;}
 		<div id="header">
 			<div class="container">
 			<h1>Titan Games</h1>
-			<a href="#" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
+			<a href="main.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
 			<ul id="menu">
-			<li><a href="#">Games</a></li>
+			<li><a href="game.php">Games</a></li>
 			<li><a href="#">Community</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Support</a></li>
-            <li><a href="#">Developer</a></li>
-		</ul>
+			<li><a href="AboutUs.php">About Us</a></li>
+			<li><a href="support.php">Support</a></li>
+			<li><a href="developer.php">Developer</a></li>
+			</ul>
 			</div>
 		</div>
 	<div id="content">
@@ -158,6 +153,8 @@ text-decoration:none;}
 							$link3 = 'logout.php';
 							$link4 = 'edit_profile.php';
 							$link5 = 'edit_grprofile.php';
+							$c = mysqli_fetch_assoc(mysqli_query($conn,"select * from developer_group where Dev_ID = '$devid' "));
+							$icon = $c['previewIMG'];
 							if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
 							{
 								echo "Welcome &nbsp;";
@@ -186,7 +183,7 @@ text-decoration:none;}
 	<div id="topdiv">
 		<div id="topdivHeader">
         	<div id="Hicon">
-			<img src="icon1.jpg"height="58"width="64"margin-left="20px"/>
+			<img src="<?php echo $icon; ?>"height="58"width="64"margin-left="20px"/>
             </div>
             <div id="settitle">
 			<div id="locktitle">
@@ -217,7 +214,7 @@ text-decoration:none;}
 			
 			<div id="titleExB">
 			</div><!--Title Blue Line-->
-			<div id="topDivBackg">
+			<div id="topDivBackg" style="background-image: url(<?php echo $background1; ?>);">
 			<div id="topdivDescrip">
 			<form name="GRating">
 			<table width="105%" border="0" cellpadding="6">
@@ -343,7 +340,7 @@ text-decoration:none;}
 			</div><!--Comment div-->
 			</div><!--Summary division-->
 			</div><!--Header division-->
-			</div><<!--Top division-->
+			</div><!--Top division-->
 
 
 </div><!--Content Lock-->
