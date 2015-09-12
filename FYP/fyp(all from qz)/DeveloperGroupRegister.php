@@ -83,10 +83,10 @@ divToHide.style.display = "block";
 			<h1>Titan Games</h1>
 			<a href="main.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
 		<ul id="menu">
-		<li><a href="game.php">Games</a></li>
+		<li><a href="#">Games</a></li>
 		<li><a href="#">Community</a></li>
 		<li><a href="AboutUs.php">About Us</a></li>
-		<li><a href="support.php">Support</a></li>
+		<li><a href="#">Support</a></li>
         <li><a href="developer.php">Developer</a></li>
 		</ul>
 			</div>
@@ -153,15 +153,15 @@ It is recommended that you appoint another leader once you group is authorized s
 <br><br>-->
 <b>Privacy*</b>
 <br><select name="GPrivacy">
-	<option value="1">Public - everyone can view the group
-	<option value="2">Private - only members can view the group
+	<option value="1">Public - everyone can view the group</option>
+	<option value="2">Private - only members can view the group</option>
 	</select>
 <br><br>
 <!--choose to display or hide company-->
 <b>Company*</b>
 <br><select id="selectList" name="CompanyAva" onchange="toggle()">
-	<option value="No">No
-	<option value="Yes" selected>Yes
+	<option value="No">No</option>
+	<option value="Yes" selected>Yes</option>
 	</select>
 <div id="hidContent">
 <br>Company Name<br><input type="text" name="CName" size="20">
@@ -192,42 +192,6 @@ It is recommended that you appoint another leader once you group is authorized s
 <br><br>
 <span style="float:right;"><input type="submit" name="submit" value="SaveGroup"/><span>
 </form>
-<?php 
-	/*if(isset($_POST["submit"]))
-	{
-	$Dev_Group_Name = $_POST["GName"];
-	$Privacy = $_POST["GPrivacy"];
-	$Com_name = $_POST["CName"];
-	$Com_addr = $_POST["GCAddress"];
-	$Com_state = $_POST["Com_state"];
-	$Com_postcode = $_POST["Com_postcode"];
-	$Com_country = $_POST["Com_country"];
-	$Com_phone = $_POST["CPhone"];
-	$Com_fax = $_POST["CFax"];
-	$Group_email = $_POST["GEmail"];
-	$Homepage = $_POST["GHomepage"];
-	if(isset($_POST["article"]))
-	{$Articles = "1";}
-	else
-	{$Articles = "0";}
-	if(isset($_POST["media"]))
-	{$Media = "1";}
-	else
-	{$Media = "0";}
-	$text = $_POST["GSummary"];
-
-	$sql = "insert into developer_group
-	(Dev_Group_Name,Privacy,Com_name,Com_addr,Com_state,Com_postcode,Com_country,Com_phone,Com_fax,Group_email,Homepage,Articles,Media,Summary)
-	values ('$Dev_Group_Name','$Privacy','$Com_name','$Com_addr','$Com_state','$Com_postcode','$Com_country','$Com_phone','$Com_fax','$Group_email','$Homepage','$Articles','$Media','$text')";
-	
-	$test = mysqli_query($conn, $sql); 
-	if (!$test) {
-	  die('Invalid query: '.mysqli_error($conn));
-	} else {
-	  echo('Success, row has been inserted <br>');
-	} 
-    }*/
-?>
 </div>
 </div>
 </BODY>
