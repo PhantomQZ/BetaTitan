@@ -154,7 +154,7 @@ $(document).ready(function(){
 if(isset($_SESSION["products"])){
 	echo count($_SESSION["products"]); 
 }else{
-	
+	echo 0;
 }
 ?>
 </a>
