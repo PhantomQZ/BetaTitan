@@ -11,6 +11,8 @@
 	margin-top: -10px;
 	margin-left:-11px;
 	width:1352px;
+	color: #f35626;
+    -webkit-animation: hue 30s infinite linear;
 }
 		#header a.logo{no-repeat 5px top;
 	display: block;
@@ -62,6 +64,15 @@ width:1120px;
 margin-top:-58px;
 }
 #body{display:block;}
+@-webkit-keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+      -webkit-filter: hue-rotate(360deg);
+    }
+}
     </style>
 </head>
 
@@ -86,15 +97,24 @@ margin-top:-58px;
 				<div id="login">
 					<span>
 						<?php
+							
 							$link1 = 'RegisterUser.php';
 							$link2 = 'loginpage.php';
 							$link3 = 'logout.php';
 							$link4 = 'edit_profile.php';
+							$link5 = 'list_pm.php';
+							$link6 = 'user_profile.php';
 							if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
 							{
-								
+							//We count the number of new messages the user has
+							$nb_new_pm = mysqli_fetch_array(mysqli_query($conn,'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['userid'].'" and user1read="no") or (user2="'.$_SESSION['userid'].'" and user2read="no")) and id2="1"'));
+							//The number of new messages is in the variable $nb_new_pm
+							$nb_new_pm = $nb_new_pm['nb_new_pm'];
+							//We display the links
 								echo "Welcome &nbsp;";
-								echo $_SESSION['login_user'];
+								echo "<a href= '".$link6."'>".$_SESSION['login_user']."</a>";
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link5."'>inbox ".$nb_new_pm."</a>";
 								echo "&nbsp;/&nbsp;";
 								echo "<a href = '".$link4."'>Edit Profile</a>";
 								echo "&nbsp;/&nbsp;";
@@ -146,7 +166,7 @@ margin-top:-58px;
     <tr>
     <tr>
     <td><label for="phone">Hp_Number: </label></td>
-	<td><input type="number" name="phone" data-type="expression" required placeholder="HP number" size="25" maxlength="11" data-message="Not a valid phone number"></td>
+	<td><input type="number" name="phone" data-type="expression" required placeholder="HP number" size="25" maxlength="10" data-message="Not a valid phone number"></td>
 </tr>
 <tr>
     <td><label for="address">Address: </label></td>
@@ -154,7 +174,7 @@ margin-top:-58px;
 </tr>
 <tr>
     <td><label for="zip">ZIP Code: </label></td>
-	<td><input type="text" name="zip" id="zip" data-type="string" size="25" data-message="This field may not be empty" /></td>
+	<td><input type="number" name="zip" id="zip" data-type="string" size="25" maxlength="5" data-message="This field may not be empty" /></td>
 </tr>
 	<tr>
     <td><label for="city">City: </label></td>
