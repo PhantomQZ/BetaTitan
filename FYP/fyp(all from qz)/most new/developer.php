@@ -1,17 +1,20 @@
 <?php    
 include("conn.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Developer Login</title>
-	<link rel ="stylesheet" type="text/css" href="login.css"/>
+	<link rel ="stylesheet" type="text/css" href="login2.css"/>
 	<style>
 	#header{
 	background: #191919 url(/borderless/images/default/bg_header.png) repeat-x center top;
 	height: 140px;
 	margin-top: -10px;
 	margin-left: -11px;
+	color: #f35626;
+    -webkit-animation: hue 30s infinite linear;
 }
 		#header a.logo{no-repeat 5px top;
 	display: block;
@@ -39,7 +42,35 @@ include("conn.php");
 		#menu li a.menutooltip{background:#080808;color:#fff;line-height:1;padding:6px;text-indent:0;width:auto;z-index:2}
 		#login{float:right;padding-right:10px;text-align:right;width:370px;color:#FFFFFF}
 		#login a{color:#FFFFFF;text-decoration:none}
+	@-webkit-keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+      -webkit-filter: hue-rotate(360deg);
+    }
+}
 	</style>
+	<script type="text/javascript">
+		function check()
+		{
+			<?php 
+			if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+			{
+				?>
+					location.href='DeveloperGroupRegister.php';
+				<?php
+			}
+			else
+			{
+				?>
+				alert("You have to login to register a developer group");
+				<?php
+			}
+			?>
+		}
+	</script>
 </head>
 <body>
 	<div id="header">
@@ -61,7 +92,7 @@ include("conn.php");
 				<div id="login">
 					<span>
 						<?php
-							session_start();
+							
 							$link1 = 'RegisterUser.php';
 							$link2 = 'loginpage.php';
 							$link3 = 'logout.php';
@@ -95,7 +126,8 @@ include("conn.php");
 				<p>Join Developer Group</p>
 				<p>Its free to create a group,You are welcome to share your game to everyone on our page<br>
 				   Continue on to create developer group by<br>clicking the button below</p>
-			  <a href="DeveloperGroupRegister.php"><button>Create</button></a>
+			  
+			  <input type = "button" onclick="check()" value="Create">
 			</div>
 		<div id="search">
 				<br><h2>Search Developer</h2>

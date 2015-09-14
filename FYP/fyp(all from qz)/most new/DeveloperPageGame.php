@@ -149,7 +149,22 @@ text-decoration:none;}
      }
 	}
 	function gothr()
-	{window.location.href='RegisterGame.php';}
+	{
+		<?php 
+			if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+			{
+				?>
+					location.href='RegisterGame.php';
+				<?php
+			}
+			else
+			{
+				?>
+				alert("You have to login to register a developer group");
+				<?php
+			}
+	?>
+	}
 	</script>
 </head>
 
