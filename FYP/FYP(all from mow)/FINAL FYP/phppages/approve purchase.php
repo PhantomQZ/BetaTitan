@@ -1,10 +1,16 @@
 <?php    
 include("adsession.php");
 include("conn.php");    
+if(!isset($_SESSION['login_admin']))
+{
+	header("location: main.php");
+}
 if(isset($_GET['approve_id']))
 {
-     $sql_query="Update payment set Status = '1' where Payment_ID =".$_GET['approve_id'];
-     mysqli_query($conn,$sql_query);
+     $sql_query="Update payment set Approve = '1' where Payment_ID =".$_GET['approve_id'];
+     $can = mysqli_query($conn,$sql_query);
+	 if(!$can)
+	 {die(mysqli_error($conn));}
      header("Location: approve purchase.php");
 }
 ?>
@@ -12,54 +18,7 @@ if(isset($_GET['approve_id']))
 <html>
 <head>
 	<title>Admin Approve Purchase</title>
-	<style type = "text/css">
-	#header
-	{
-		color:white;
-		background:black;
-		height:150px;
-		width: 4000px;
-		position: fixed;
-		top:-10px;
-	}
-	#welcome
-	{font-weight:bold;}
-	body{background:#fbffd9;}
-	#list
-	{
-		list-style-type: none;
-		padding:0;
-		margin-top:150px;
-	}
-	#nav li{margin: 0 0 .2em 0;}
-	#list a
-	{
-		display: block;
-		width: 180px;
-		height:40px;
-		background:gray;
-		color: white;
-		text-decoration:none;
-		margin bottom: 10px;
-		padding: .2em .8em;
-	}
-	#nav
-	{
-		float:left;
-		padding:5px;
-	}
-	#section
-	{
-		width:350px;
-		float:left;
-		padding:10px;
-		margin-top:150px;
-		font-size:20px;
-	}
-	table,th,tr{border-collapse:collapse;}
-	th,td{padding:5px;}
-	#section h1{width:600px;}
-	</style>
+		<link rel="stylesheet" type="text/css" href="admin.css">
 	<script type="text/javascript">
 function approve_id(id)
 {
@@ -73,21 +32,21 @@ function approve_id(id)
 <body>
 	<div id = "main">
 		<div id = "header">
-			<p id="welcome"><h1 style="black; font-size:40px;"> Admin Page </h1><br>Welcome <?php echo $login_session;?></p>
+			<a href="admin.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
 		</div>
 		<div id = "nav">
 			<ul id = "list">
-				<li><a href="admin.php">Home</a></li>
-				<li><a href="main.php">View Site</a></li>
-				<li><a href="aduser.php">Manage User</a></li>
-				<li><a href="approve purchase.php">Confirm Order</a></li>
-				<li><a href="approve game.php">Manage Game</a></li>
-				<li><a href="approve group.php">Manage Developer Group</a></li>
-				<li><a href="http://mail.google.com">Official E-mail</a></li>
-				<li><a href="adlogout.php">Logout</a></li>
+					<li><a href="admin.php"><b>Home</b></a></li>
+					<li><a href="main.php"><b>View Site</b></a></li>
+					<li><a href="aduser.php"><b>Manage User</b></a></li>
+					<li id="selected"><a href="approve purchase.php"><b>Confirm Order</b></a></li>
+					<li><a href="approve game.php"><b>Manage Game</b></a></li>
+					<li><a href="approve group.php"><b>Manage Developer Group</b></a></li>
+					<li><a href="http://mail.google.com"><b>Official E-mail</b></a></li>
+					<li><a href="adlogout.php"><b>Logout</b></a></li>
 			</ul>
 		</div>
-		<div id = "section">
+		<div id = "section" style="background:white; opacity: 0.9;">
 			<h1>Approve Purchase</h1>
 			<table border="2" style="width:100%">
 				<tr>
@@ -96,7 +55,6 @@ function approve_id(id)
 					<th>User Name</th>
 					<th>Payment Date</th>
 					<th>Total Paid</th>
-					<th>Method of Payment</th>
 					<th>Receipt</th>
 					<th>Approve Payment</th>
 				</tr>
@@ -109,26 +67,26 @@ function approve_id(id)
 						$x=0;
 						$query = "select * from payment";
 						$result = mysqli_query($conn,$query);
-						
-						
 						while ($row = mysqli_fetch_array($result))
 						{
-							$query2 = mysqli_fetch_array(mysqli_query($conn,"select user.User_usrname, user.User_ID, payment.User_ID from user,payment where user.User_ID = payment.User_ID"));
-							$name = $query2['User_usrname'];
+							$uid = $row['User_ID'];
+							$pay = $row['Payment_ID'];
+							$query2 = mysqli_query($conn,"select * from user where User_ID = $uid");
+							$run = mysqli_fetch_array($query2);
+							$name = $run['User_usrname'];
 							echo "<tr>";
-							echo "<td>" . $row['Payment_ID']."</td>";
+							echo "<td>" . $pay."</td>";
 							echo "<td>" . $row['Order_ID']."</td>";
 							echo "<td>" . $name."</td>";
 							echo "<td>" . $row['Payment_date']."</td>";
 							echo "<td>" . $row['Price']."</td>";
-							echo "<td>" . $row['Method_of_payment']."</td>";
 							?>
-							<td><a href="<?php echo $row['Receipt']?>"</a>Link</td>
+							<td><a href="<?php echo $row['Receipt']?>" target="_blank">Link</a></td>
 							<?php
-							if($row['Status']==0)
+							if($row['Approve']==0)
 							{
 								?>
-								<td><a href="javascript:approve_id(<?php echo $row[0];?>)">Approve</a></td>
+								<td><a href="javascript:approve_id(<?php echo $pay;?>)">Approve</a></td>
 								<?php 
 							}
 							else

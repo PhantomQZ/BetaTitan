@@ -22,17 +22,25 @@ else
 	$rows = mysqli_num_rows($result);
 	$dn = mysqli_fetch_assoc($result);
 	$usrid = $dn['User_ID'];
-	if($rows == 1)
+	$status = $dn['Status'];
+	if($status == 1)
 	{
-	$_SESSION['loggedin']=true;
-	$_SESSION['login_user'] = $username;
-	$_SESSION['username'] = $username;
-	$_SESSION['userid'] = $usrid;
-	header("location:main.php");
+		$error = "Your account had been block, <br> contact admin for more information";
 	}
 	else
 	{
-	$error = "Username or Password is invalid";
+		if($rows == 1)
+		{
+		$_SESSION['loggedin']=true;
+		$_SESSION['login_user'] = $username;
+		$_SESSION['username'] = $username;
+		$_SESSION['userid'] = $usrid;
+		header("location:main.php");
+		}
+		else
+		{
+		$error = "Username or Password is invalid";
+		}
 	}
 	mysqli_close($conn);
 }
