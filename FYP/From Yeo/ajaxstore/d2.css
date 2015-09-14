@@ -239,6 +239,19 @@ ul.products-wrp li .item-box{
 ul.products-wrp li .item-box div{
 	margin-bottom:5px;.
 }
+#test{
+	margin-left: 5px;
+	background-color: #D80000;
+	border: none;
+	color: #fff;
+	font:15pt;
+	color: yellow;
+	font-weight:bold;
+}
+#test[disabled=disabled]{
+	background-color: #FC84A8;
+}
+
 ul.products-wrp li .item-box button{
 	margin-left: 5px;
 	background: #D80000;
@@ -247,6 +260,7 @@ ul.products-wrp li .item-box button{
 	font-size:15pt;
 	font-weight:bold;
 }
+
 ul.products-wrp li .item-box button[disabled=disabled]{
 	background: #FC84A8;
 }

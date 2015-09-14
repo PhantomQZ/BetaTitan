@@ -1,5 +1,5 @@
 <?php
-
+//We start sessions
 $db_username        = 'root'; //MySql database username
 $db_password        = ''; //MySql dataabse password
 $db_name            = 'game_store'; //MySql database name
@@ -16,7 +16,17 @@ $taxes				= array( //List your Taxes percent here.
 $conn = new mysqli($db_host, $db_username, $db_password,$db_name); //connect to MySql
 if ($conn->connect_error) {//Output any connection error
     die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
-}
+	}
+/******************************************************
+------------------Required Configuration---------------
+Please edit the following variables so the members area
+can work correctly.
+******************************************************/
+
+//We log to the DataBase
+mysql_connect('localhost', 'root', '');
+mysql_select_db('game_store');
+
 //Webmaster Email
 $mail_webmaster = 'example@example.com';
 

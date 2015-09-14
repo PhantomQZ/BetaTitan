@@ -8,6 +8,24 @@ $row = mysqli_fetch_assoc($result);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script>
+function comments()
+				{	
+					<?php
+						if(isset($_POST["btnsubmit"])){
+						$comment = $_POST['GSummary'];
+						$user = $_SESSION['login_user'];
+						$gname = $row['Game_name'];
+							if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+							mysqli_query($conn,"Insert into comment (Comment_text, User_ursname, Game_name) value ('$comment', '$user', '$gname')");
+							header('Location: d2.php');
+							}
+							else{
+							header('Location: loginpage.php');
+							}
+						}
+					?>
+				}
+
 $(document).ready(function(){	
 		$(".form-item").submit(function(e){
 			var form_data = $(this).serialize();
@@ -61,6 +79,7 @@ $(document).ready(function(){
 <head>
 <meta charset="utf-8">
 <link href="d2.css" rel="stylesheet" type="text/css"><ul></ul>
+<link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
 <title>Dota 2</title>
 	<style>
 		#header{
@@ -160,20 +179,97 @@ text-decoration:none;}
 	background-size:cover;
 }
 
+ a.fancybox img {
+        border: none;
+        box-shadow: 0 1px 7px rgba(0,0,0,0.6);
+        -o-transform: scale(1,1); -ms-transform: scale(1,1); -moz-transform: scale(1,1); -webkit-transform: scale(1,1); transform: scale(1,1); -o-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out;
+    } 
+ a.fancybox:hover img {
+        position: relative; z-index: 999; -o-transform: scale(1.03,1.03); -ms-transform: scale(1.03,1.03); -moz-transform: scale(1.03,1.03); -webkit-transform: scale(1.03,1.03); transform: scale(1.03,1.03);
+    }
+
+
     </style>
+	<style>
+            /****** Rating Starts *****/
+            @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+            fieldset, label { margin: 0; padding: 0; }
+            body{ margin: 20px; }
+            h1 { font-size: 1.5em; margin: 10px; }
+
+            .rating { 
+                border: none;
+                float: left;
+            }
+
+            .rating > input { display: none; } 
+            .rating > label:before { 
+                margin: 5px;
+                font-size: 1.25em;
+                font-family: FontAwesome;
+                display: inline-block;
+                content: "\f005";
+            }
+
+            .rating > .half:before { 
+                content: "\f089";
+                position: absolute;
+            }
+
+            .rating > label { 
+                color: #ddd; 
+                float: right; 
+            }
+
+            .rating > input:checked ~ label, 
+            .rating:not(:checked) > label:hover,  
+            .rating:not(:checked) > label:hover ~ label { color: #FFD700;  }
+
+            .rating > input:checked + label:hover, 
+            .rating > input:checked ~ label:hover,
+            .rating > label:hover ~ input:checked ~ label, 
+            .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }     
+
+
+            /* Downloaded from http://devzone.co.in/ */
+        </style>
 </head>
 
 <body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+<script type="text/javascript">
+    $(function($){
+        var addToAll = false;
+        var gallery = true;
+        var titlePosition = 'inside';
+        $(addToAll ? 'img' : 'img.fancybox').each(function(){
+            var $this = $(this);
+            var title = $this.attr('title');
+            var src = $this.attr('data-big') || $this.attr('src');
+            var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
+            $this.wrap(a);
+        });
+        if (gallery)
+            $('a.fancybox').attr('rel', 'fancyboxgallery');
+        $('a.fancybox').fancybox({
+            titlePosition: titlePosition
+        });
+    });
+    $.noConflict();
+</script>
 <div id="body">
 		<div id="header">
 			<div class="container">
 			<h1>Titan Games</h1>
 			<a href="main.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
 		<ul id="menu">
-		<li><a href="#">Games</a></li>
+		<li><a href="game.php">Games</a></li>
 		<li><a href="#">Community</a></li>
 		<li><a href="AboutUs.php">About Us</a></li>
-		<li><a href="#">Support</a></li>
+		<li><a href="support.php">Support</a></li>
         <li><a href="developer.php">Developer</a></li>
 		</ul>
 			</div>
@@ -183,17 +279,49 @@ text-decoration:none;}
 			<div id="member">
 				<div id="login">
 					<span>
-						Welcome&nbsp;/&nbsp;
-						<a href="RegisterUser.php">Register</a>
-						&nbsp;/&nbsp;
-						<a href="login.php">Login</a>
+						<?php
+//We count the number of new messages the user has
+$nb_new_pm = mysqli_fetch_array(mysqli_query($conn,'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['userid'].'" and user1read="no") or (user2="'.$_SESSION['userid'].'" and user2read="no")) and id2="1"'));
+//The number of new messages is in the variable $nb_new_pm
+$nb_new_pm = $nb_new_pm['nb_new_pm'];
+//We display the links
+							$link1 = 'RegisterUser.php';
+							$link2 = 'loginpage.php';
+							$link3 = 'logout.php';
+							$link4 = 'edit_profile.php';
+							$link5 = 'list_pm.php';
+							if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+							{
+								echo "Welcome &nbsp;";
+								echo $_SESSION['login_user'];
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link4."'>Edit Profile</a>";
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link5."'>My personnal messages ".$nb_new_pm."</a>";
+								echo "&nbsp;/&nbsp;";
+								echo "<a href = '".$link3."'>Log Out</a>";
+							}
+							else
+								{
+								echo "Welcome &nbsp;/&nbsp; </i>";
+								echo "<a href='".$link1."'>Register</a>&nbsp;/&nbsp;";
+								echo "<a href='".$link2."'>Login</a>";
+								}
+							?>
 					</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<br>
+	<?php
+	if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+	{	?>
 		<a href="#" class="cart-box" id="cart-info" title="View Cart">
+		<?php
+		}
+		?>
+
 <?php 
 if(isset($_SESSION["products"])){
 	echo count($_SESSION["products"]); 
@@ -213,7 +341,7 @@ if(isset($_SESSION["products"])){
 	<div id="topdiv">
 		<div id="topdivHeader">
         	<div id="Hicon">
-			<img src="dota2_icon.png""height="50"width="64"margin-left="20px"/>
+			<img src="<?php echo $row['Game_icon'] ?>" "height="50"width="64"margin-left="20px"/>
             </div>
             <div id="settitle">
 			<div id="locktitle">
@@ -223,8 +351,9 @@ if(isset($_SESSION["products"])){
 //List products from database
 //Display fetched records as you please
 
+	if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+	{	
 $game =  '<ul class="products-wrp">';
-
 $game .= <<<EOT
 <li>
 <form class="form-item">
@@ -239,13 +368,29 @@ EOT;
 $game .= '</ul></div>';
 
 echo $game;
-?>
+	}
+	else{
+$game =  '<ul class="products-wrp">';
+$game .= <<<EOT
+<li>
+<form class="form-item">
+<div class="item-box">
+    <input name="Game_Register_ID" type="hidden" value="1">
+	<button type="button" onclick="alert('You must login to purchase')">Add to Cart</button>
+</div>
+</form>
+</li>
+EOT;
+
+$game .= '</ul></div>';
+
+echo $game;
+		}
+			?>
 			<div id="titleExB">
 			<br><div id="gameprice"><b>RM <?php echo $row["Game_price"]; ?></b></div></div>
 		
 			</div><!--End of header title division-->
-			
-			
 
 			</div><!--Title Blue Line-->
 			<div id="topDivBackg">
@@ -263,10 +408,10 @@ echo $game;
 					<td>Single & Multiplayer
 				<tr>
 					<td>Developer
-					<td><a href="#"target="_blank"title="GHomePage" style="color: white"><b>Group 2</b></a>
+					<td><a href="#"target="_blank"title="GHomePage" style="color: white"><b><?php echo $row['Dev_Group_Name'] ?></b></a>
 				<tr>
 					<td>Official Page
-					<td><a href="#"target="_blank"title="GHomePage" style="color: white"><b>Dota2.com</b></a>
+					<td><a href="<?php echo $row['Game_homepage'] ?>"target="_blank"title="GHomePage" style="color: white"><b><?php echo $row['Game_homepage'] ?></b></a>
 				<tr>
 					<td>Contact
 					<td><a href="#"target="_blank"title="DevContact" style="color: white"><b>Send Message</b></a>
@@ -289,22 +434,55 @@ echo $game;
 					<td>
 					<td>
 				<tr>
+					<?php
+					$takeratings = mysqli_fetch_assoc(mysqli_query($conn,"select * from tbl_rating where 'Game_Register_ID` = '" . $gid . "'"));
+					$ratings = $takeratings['User_ID'];
+					$sum = 0;
+					$count = 0;
+					$avsum = 0;
+					foreach($ratings as $ratingsc)
+						{
+							$sum+= $ratingsc['rate'];
+							$count++;
+						}
+					$avsum = $sum/$count;
+					echo $avsum;
+					?>
 					<td>Total Rating
 					<td><div class="rating">
-					<span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
-					<span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
-					<span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
-					<span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
-					<span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+					<span><?php echo $avsum; ?></span>
 					</div>
 				<tr>
 					<td>Your Rating
 					<td><div class="rating">
-					<span><input type="radio" name="Urating" id="str5" value="5"><label for="str5"></label></span>
-					<span><input type="radio" name="Urating" id="str4" value="4"><label for="str4"></label></span>
-					<span><input type="radio" name="Urating" id="str3" value="3"><label for="str3"></label></span>
-					<span><input type="radio" name="Urating" id="str2" value="2"><label for="str2"></label></span>
-					<span><input type="radio" name="Urating" id="str1" value="1"><label for="str1"></label></span>
+					<script>
+                        $(document).ready(function () {
+                            $("#demo1 .stars").click(function () {
+                           
+                                $.post('rating.php',{rate:$(this).val()},function(d){
+                                    if(d>0)
+                                    {
+                                        alert('You already rated');
+                                    }else{
+                                        alert('Thanks For Rating');
+                                    }
+                                });
+                                $(this).attr("checked");
+                            });
+                        });
+                    </script>
+                    <fieldset id='demo1' class="rating">
+                        <input class="stars" type="radio" id="star5" name="rating" value="5" />
+                        <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input class="stars" type="radio" id="star4" name="rating" value="4" />
+                        <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input class="stars" type="radio" id="star3" name="rating" value="3" />
+                        <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input class="stars" type="radio" id="star2" name="rating" value="2" />
+                        <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input class="stars" type="radio" id="star1" name="rating" value="1" />
+                        <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                    </fieldset>
 					</div>
 				</table>
 			</form>
@@ -360,38 +538,70 @@ echo $game;
 				<div class="wrapper">
 				<div class="scrolls">
 				<div class="imageDiv">
-				<img src="pic1.jpg"/>
-				<img src="pic2.png"/>
-				<img src="pic3.jpg"/>
-				<img src="pic4.jpg"/>
-				<img src="pic5.jpg"/>
-				<img src="pet.jpeg"/>
-				<img src="pic7.jpg"/>
-				<img src="pic8.jpg"/>
-				<img src="pic9.jpg"/>
+				<video id="my-video" class="video" width="320" height="150" controls><source src="DotA 2 Trailer 2.mp4"></video>
+				<img class="fancybox" src="pic1.jpg"/>
+				<img class="fancybox" src="pic2.png"/>
+				<img class="fancybox" src="pic3.jpg"/>
+				<img class="fancybox" src="pic4.jpg"/>
+				<img class="fancybox" src="pic5.jpg"/>
+				<img class="fancybox" src="pet.jpeg"/>
+				<img class="fancybox" src="pic7.jpg"/>
+				<img class="fancybox" src="pic8.jpg"/>
+				<img class="fancybox" src="pic9.jpg"/>
 			</div><!--Image Division for scrolling-->
 			</div><!--Scroll division-->
 			</div><!--Wrapper division-->
 		</body>
 		</html>
+		
 			</div><!--img Division for margin-->
 			<div id="CommentSec">
 			<h1>Comments</h1>
-			<p><span style="color:red">Mow</span>
-			<br>I think this game is worth buying</p>
-			<br>
-			<p><span style="color:red">Philips</span><br>
-			Yo, looking for FPS game for long, at last Battlefield decide to make another episode.</p>
-			<br>
-			<p><span style="color:red">Yeo</span>
-			<br>Fun to play, fun to kill, this is a game for FPS lover</p>
-			<br>
-			<p><span style="color:red">Terra</span><br>
-			Best game ever</p>
-			<form name="comment">
+			<?php
+			$name = $row['Game_name'];
+			$cmt = mysqli_query($conn, "select * from comment where Game_name='$name'");
+			while($getcmt = mysqli_fetch_assoc($cmt))
+			{	$result = $getcmt['Comment_text'];
+				//$name = $_SESSION['login_user'];
+				if($result!=NULL){
+				?>
+				<br>
+				<b><u><?php echo $getcmt['User_ursname'];?></u></b>
+				<br>
+				<?php
+				echo $getcmt['Comment_text'];
+				?>
+				<br>
+				<?php
+				}
+				else{
+				
+				}
+				
+			
+			}
+			
+			?>
+			
+			<div id="hidContent">
+			<?php
+			if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+			?>
+			<form name="comment" method="POST">
 			<br><textarea name="GSummary" cols="80" rows="5" maxlength="1000"></textarea>
-			<br><br><input type="submit" name="btnsubmit" value="Comment"/>
+			<br><br><input type="submit" name="btnsubmit" value="Comment" onclick="comments();"/>
 			</form>
+			<?php
+			}
+			else{
+			?>
+				<br><br>
+				<b><u><a href="loginpage.php"><?php echo "You must login to comment.";?></a></u></b>
+			<?php
+			}
+			?>
+			
+			</div>
 			</div><!--Comment div-->
 			</div><!--Summary division-->
 			</div><!--Header division-->

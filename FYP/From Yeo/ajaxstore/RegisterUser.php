@@ -72,10 +72,10 @@ margin-top:-58px;
 			<h1>Titan Games</h1>
 			<a href="main.php" class="logo" title="Home"><img src="BetaTitan.png" height="140"/></a>
 		<ul id="menu">
-		<li><a href="#">Games</a></li>
+		<li><a href="game.php">Games</a></li>
 		<li><a href="#">Community</a></li>
 		<li><a href="AboutUs.php">About Us</a></li>
-		<li><a href="#">Support</a></li>
+		<li><a href="support.php">Support</a></li>
         <li><a href="developer.php">Developer</a></li>
 		</ul>
 			</div>

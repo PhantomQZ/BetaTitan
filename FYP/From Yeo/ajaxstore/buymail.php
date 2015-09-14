@@ -1,55 +1,14 @@
 <?php
 session_start(); //start session
 include("conn.php"); //include config file
-$lastno = mysqli_query($conn, "SELECT * FROM cart ORDER BY Order_ID DESC LIMIT 1");
-$rows = mysqli_fetch_assoc($lastno);
-?>
-<?php
-	if (isset($_GET['process'])){
-	$total 			= 0;
-	$list_tax 		= '';
-	$cart_box 		= '<ul class="view-cart">';
-	$lastnum=0;
-	
-	foreach($_SESSION["products"] as $product){ //Print each item, quantity and price.
-		$product_name = $product["Game_name"];
-		$product_price = $product["Game_price"];
-		$product_code = $product["Game_Register_ID"];
-		
-		$item_price 	= sprintf("%01.2f",($product_price));  // price x qty = total item price
-		
-		$cart_box 		.=  "<li> $product_code &ndash;  $product_name <span> $currency. $item_price </span></li>";
-		
-		$subtotal 		= ($product_price ); //Multiply item quantity * price
-		$total 			= ($total + $subtotal); //Add up to total price
-		if ($rows['Order_ID']!=NULL)
-		{
-		$lastnum=$rows['Order_ID']+1;
-		$query ="Insert into cart(Order_ID, Game_name, Game_price) values ('$lastnum', '$product_name', '$product_price') ";
-		mysqli_query($conn,$query);
-		}
-		else
-		{
-		$lastnum=1;
-		$query ="Insert into cart(Order_ID, Game_name, Game_price) values ('$lastnum', '$product_name', '$product_price') ";
-		mysqli_query($conn,$query);	
-		}
-	}
-		$user_check = $_SESSION['login_user'];    
-		$userid = mysqli_fetch_assoc(mysqli_query($conn,"select User_ID from user where User_usrname like '$user_check'"));
-		$uid = $userid['User_ID'];
-		$date = date('Y-m-d');
-		$query ="Insert into payment(Order_ID, User_ID, Price, Payment_date) values ('$lastnum', '$uid', '$total', '$date') ";
-		mysqli_query($conn,$query);	
-			unset($_SESSION["products"]);		 
-	}
+$orders = $_SESSION["order"];
+//$result = mysqli_query($conn, "select * from order where Order_ID=orders");
+//$row = mysqli_fetch_assoc($result);
 ?>
 <?php
 $user_check = $_SESSION['login_user'];    
-$userid = mysqli_fetch_assoc(mysqli_query($conn,"select * from user where User_usrname like '$user_check'"));
+$userid = mysqli_fetch_assoc(mysqli_query($conn,"select User_ID from user where User_usrname like '$user_check'"));
 $uid = $userid['User_ID'];
-$ufname= $userid['User_Fname'];
-$ulname= $userid['User_Lname'];
 $a = "select * from user where User_ID ='$uid'";
 //$a = "select * from user where User_email='$mail' AND User_usrname='$usrname' ";
 $q = mysqli_query($conn, $a);
@@ -89,24 +48,36 @@ $mail->Body    = "<html>
 <div align=\"center\"><p><img src=\"cid:logoimg\" /></p></div><br>
 <br>
 
-Hello, $ulname $ufname <br><br>
+Your Shopping Cart: <br>
+Username : ' . $cname . ' <br>
+<br>
 
 <br> The game will be send to you after the Admin check the validity of the bank in receipt.
 <br> If the payment have no been made for three days, the order will automatically be reject.
 <br> Please bank in the receipt in the link below.
-<a href='http://localhost/ajaxstore/receipt.php?OID=$lastnum' style='font-size=15pt;'>Make Your Payment Here</a>
+<a href='http://localhost/ajaxstore/d2.php' style='font-size=15pt;'>Make Your Payment Here</a>
 <br/>
 
 </div>
 </body>
 </html>";
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+// Additional headers
+$headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
+$headers .= 'From: Birthday Reminder <birthday@example.com>' . "\r\n";
+$headers .= 'Cc: birthdayarchive@example.com' . "\r\n";
+$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
+$mail->AltBody = "This is an email to help you remind your password.";
+//$body             = file_get_contents('contents.html');
+//$body             = preg_replace('/\\\\/','', $body);
+
+
 if(!$mail->Send()) {
   echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
   echo "Message has been sent";
 }
 }
-echo "<script language=\"javascript\">alert('An email has been sent to your inbox for payment. Redirecting you to main page.');
-					window.location.href='d2.php';
-			 </script>";		
 ?>
