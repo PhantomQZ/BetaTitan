@@ -1,0 +1,19 @@
+body{background-image:url(background.jpg)}
+#box{
+	background: rgba(255,255,255,0.60);
+	width: 1225px;height:250px;
+	margin-left:60px;
+	margin-top: 45px;
+	padding-left: -300px;
+}
+#search{
+	width: 600;
+	margin-top: -12px;
+	float:right;
+}
+#register{
+	width: 350px;
+	margin-top: -12px;
+	float:left;
+}
+#try{width: 1000px;margin-left: 150px;}
