@@ -173,38 +173,46 @@ $row = mysqli_fetch_assoc($result);
 
 		<div style="float:right;">
 			<h2>Purchase History</h2>
+			<form name="searchgame" method="post" action="">
+		<p style="color:black;">Search Order:<input type="number" name="keyword" size="20">
+		
+		<p><input type="submit" name="search" value="SEARCH">
+		</form>
 			<fieldset style="width:300px;">
+			<div style="border:1px solid black;width:350px;height:300px;overflow:scroll;">
 			<?php 
+$uid=$_SESSION['userid'];
+function test($data)
+	{
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+	if(isset($_POST["search"]))
+{
+	$keyword = "";
+	$keyword = test($_POST["keyword"]);
+	$result2 = mysqli_query($conn,"select * from payment where Order_ID='$keyword' AND User_ID='$uid'");
+	if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+	{
 			$uid = $row['User_ID'];
 			$firstsql = "select * from payment where User_ID = '$uid'";
 			$firstget = mysqli_query($conn,$firstsql);
-			while($first = mysqli_fetch_assoc($firstget))
+			while($first = mysqli_fetch_assoc($result2))
 			{
 				?>
 				<div>
-					<label style="font-size:20px;">Order ID :</label>
-					<div>
-				<?php echo $first['Order_ID'];?>
-					</div>
-				</div>
-				
+					<label style="font-size:20px;">Order ID :  </label><?php echo $first['Order_ID'];?>
+				</div>		
 				<div>
-					<label style="font-size:20px;">Payment Date :</label>
-					<div>
-				<?php echo $first['Payment_date'];?>
-					</div>
+					<label style="font-size:20px;">Payment Date : </label><?php echo $first['Payment_date'];?> 
 				</div>
-				
 				<div>
-					<label style="font-size:20px;">Total Price :</label>
-					<div>
-				<?php echo $first['Price'];?>
-					</div>
+					<label style="font-size:20px;">Total Price : </label><?php echo $first['Price'];?> 
 				</div>
-				
 				<div>
 					<label style="font-size:20px;">Receipt Submit Date :</label>
-					<div>
 				<?php 
 					if($first['Submit_Date']==NULL)
 					{
@@ -215,12 +223,10 @@ $row = mysqli_fetch_assoc($result);
 					echo $first['Submit_Date'];
 					}
 				?>
-					</div>
 				</div>
 				
 				<div>
 					<label style="font-size:20px;">Receipt :</label>
-					<div>
 					<?php 
 						if($first['Receipt']==NULL)
 						{
@@ -233,14 +239,70 @@ $row = mysqli_fetch_assoc($result);
 							<?php
 						}
 					?>
-					</div>
 				</div>
+				<br><br>
 				<?php
 			}
-			?>
+	}
+}
+else
+{
+	if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+	{
+			$uid = $row['User_ID'];
+			$firstsql = "select * from payment where User_ID = '$uid'";
+			$firstget = mysqli_query($conn,$firstsql);
+			while($first = mysqli_fetch_assoc($firstget))
+			{
+				?>
+				<div>
+					<label style="font-size:20px;">Order ID :  </label><?php echo $first['Order_ID'];?>
+				</div>		
+				<div>
+					<label style="font-size:20px;">Payment Date : </label><?php echo $first['Payment_date'];?> 
+				</div>
+				<div>
+					<label style="font-size:20px;">Total Price : </label><?php echo $first['Price'];?> 
+				</div>
+				<div>
+					<label style="font-size:20px;">Receipt Submit Date :</label>
+				<?php 
+					if($first['Submit_Date']==NULL)
+					{
+					echo "Not Submit";
+					}
+					else
+					{
+					echo $first['Submit_Date'];
+					}
+				?>
+				</div>
+				
+				<div>
+					<label style="font-size:20px;">Receipt :</label>
+					<?php 
+						if($first['Receipt']==NULL)
+						{
+						echo "Not Submit";
+						}
+						else
+						{
+							?>
+						<a href="<?php echo $first['Receipt']; ?>" target="_blank">Link</a>
+							<?php
+						}
+					?>
+				</div>
+				<br><br>
+				<?php
+			}
+	}
+}
+	?>
 			</fieldset>
 		</div>
 		</fieldset>
+		</div>
 </div>
 </div>
 

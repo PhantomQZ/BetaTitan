@@ -90,11 +90,15 @@ $mail->Body    = "<html>
 <div align=\"center\"><p><img src=\"cid:logoimg\" /></p></div><br>
 <br>
 
-Hello, $ulname $ufname <br><br>
+<h2>Hello, $ulname $ufname </h2><br>
+
+<h3>Your Order ID is : <b>$lastnum</b></h3><br>
+
+You can view the purchase status in your user profile, by searching your order in provided search box with given Order ID.
 
 <br> The game will be send to you after the Admin check the validity of the bank in receipt.
 <br> If the payment have no been made for three days, the order will automatically be reject.
-<br> Please bank in the receipt in the link below.
+<br> Please bank in the receipt in the link below.<br><br>
 <a href='http://localhost/fyp/receipt.php?orderid=$lastnum' style='font-size=15pt;'>Make Your Payment Here</a>
 <br/>
 
